@@ -1,12 +1,9 @@
 # генерация card service 
-protoc --go_out=.  service/auth.proto
+protoc --go_out=.  auth.proto
 
-protoc --go-grpc_out=. service/auth.proto
+protoc --go-grpc_out=. auth.proto
 
-
-
-cp -r ./github.com/usmonnuriddinzoda/sharedpb/* .
+cp -r ./github.com/usmonnuriddinzodau/sharedpb/* .
 rm -r ./github.com
-
 # Пауза на 10 секунды
-sleep 10
+#sleep 10
