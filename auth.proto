@@ -3,7 +3,7 @@ syntax = "proto3";
 package shared.service;
 
 
-option go_package = "github.com/usmonnuriddinzodau/sharedpb/service/authpb";
+option go_package = "github.com/usmonnuriddinzoda/sharedpb/service/authpb";
 
 // Сервис для auth.
 service AuthService {
