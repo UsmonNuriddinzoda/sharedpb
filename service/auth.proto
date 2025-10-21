@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package shared.service;
+
+
+option go_package = "github.com/usmonnuriddinzodau/sharedpb/service/authpb";
+
+// Сервис для auth.
+service AuthService {
+  rpc Register (RegisterReq) returns (RegisterResp);
+}
+
+message AuthServiceError {
+  int64 err_code = 1;
+  string err_description = 2;
+}
+
+message RegisterReq {
+  string login = 1;
+  string password = 2;
+}
+
+message RegisterResp {
+  string role = 1;
+  string requestId = 2;
+  AuthServiceError error = 3;
+}
