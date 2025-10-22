@@ -1,4 +1,4 @@
-module github.com/usmonnuriddinzoda/sharedpb
+module github.com/UsmonNuriddinzoda/sharedpb
 
 go 1.25.3
 

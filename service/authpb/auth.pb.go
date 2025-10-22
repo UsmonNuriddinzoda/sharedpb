@@ -202,7 +202,7 @@ const file_auth_proto_rawDesc = "" +
 	"\trequestId\x18\x02 \x01(\tR\trequestId\x126\n" +
 	"\x05error\x18\x03 \x01(\v2 .shared.service.AuthServiceErrorR\x05error2K\n" +
 	"\vAuthService\x12<\n" +
-	"\x05Login\x12\x18.shared.service.LoginReq\x1a\x19.shared.service.LoginRespB6Z4github.com/usmonnuriddinzoda/sharedpb/service/authpbb\x06proto3"
+	"\x05Login\x12\x18.shared.service.LoginReq\x1a\x19.shared.service.LoginRespB6Z4github.com/UsmonNuriddinzoda/sharedpb/service/authpbb\x06proto3"
 
 var (
 	file_auth_proto_rawDescOnce sync.Once
