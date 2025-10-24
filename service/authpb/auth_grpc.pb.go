@@ -19,7 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_Login_FullMethodName = "/shared.service.AuthService/Login"
+	AuthService_LoginCustomer_FullMethodName = "/shared.service.AuthService/LoginCustomer"
+	AuthService_LoginUser_FullMethodName     = "/shared.service.AuthService/LoginUser"
+	AuthService_SendOtp_FullMethodName       = "/shared.service.AuthService/SendOtp"
+	AuthService_ConfirmOtp_FullMethodName    = "/shared.service.AuthService/ConfirmOtp"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -28,7 +31,10 @@ const (
 //
 // Сервис для auth.
 type AuthServiceClient interface {
-	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
+	LoginCustomer(ctx context.Context, in *LoginCustomerReq, opts ...grpc.CallOption) (*LoginCustomerResp, error)
+	LoginUser(ctx context.Context, in *LoginUserReq, opts ...grpc.CallOption) (*LoginUserResp, error)
+	SendOtp(ctx context.Context, in *SendOtpReq, opts ...grpc.CallOption) (*SendOtpResp, error)
+	ConfirmOtp(ctx context.Context, in *ConfirmOtpReq, opts ...grpc.CallOption) (*ConfirmOtpResp, error)
 }
 
 type authServiceClient struct {
@@ -39,10 +45,40 @@ func NewAuthServiceClient(cc grpc.ClientConnInterface) AuthServiceClient {
 	return &authServiceClient{cc}
 }
 
-func (c *authServiceClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
+func (c *authServiceClient) LoginCustomer(ctx context.Context, in *LoginCustomerReq, opts ...grpc.CallOption) (*LoginCustomerResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(LoginResp)
-	err := c.cc.Invoke(ctx, AuthService_Login_FullMethodName, in, out, cOpts...)
+	out := new(LoginCustomerResp)
+	err := c.cc.Invoke(ctx, AuthService_LoginCustomer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) LoginUser(ctx context.Context, in *LoginUserReq, opts ...grpc.CallOption) (*LoginUserResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LoginUserResp)
+	err := c.cc.Invoke(ctx, AuthService_LoginUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) SendOtp(ctx context.Context, in *SendOtpReq, opts ...grpc.CallOption) (*SendOtpResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendOtpResp)
+	err := c.cc.Invoke(ctx, AuthService_SendOtp_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) ConfirmOtp(ctx context.Context, in *ConfirmOtpReq, opts ...grpc.CallOption) (*ConfirmOtpResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConfirmOtpResp)
+	err := c.cc.Invoke(ctx, AuthService_ConfirmOtp_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +91,10 @@ func (c *authServiceClient) Login(ctx context.Context, in *LoginReq, opts ...grp
 //
 // Сервис для auth.
 type AuthServiceServer interface {
-	Login(context.Context, *LoginReq) (*LoginResp, error)
+	LoginCustomer(context.Context, *LoginCustomerReq) (*LoginCustomerResp, error)
+	LoginUser(context.Context, *LoginUserReq) (*LoginUserResp, error)
+	SendOtp(context.Context, *SendOtpReq) (*SendOtpResp, error)
+	ConfirmOtp(context.Context, *ConfirmOtpReq) (*ConfirmOtpResp, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
 
@@ -66,8 +105,17 @@ type AuthServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAuthServiceServer struct{}
 
-func (UnimplementedAuthServiceServer) Login(context.Context, *LoginReq) (*LoginResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+func (UnimplementedAuthServiceServer) LoginCustomer(context.Context, *LoginCustomerReq) (*LoginCustomerResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LoginCustomer not implemented")
+}
+func (UnimplementedAuthServiceServer) LoginUser(context.Context, *LoginUserReq) (*LoginUserResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LoginUser not implemented")
+}
+func (UnimplementedAuthServiceServer) SendOtp(context.Context, *SendOtpReq) (*SendOtpResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendOtp not implemented")
+}
+func (UnimplementedAuthServiceServer) ConfirmOtp(context.Context, *ConfirmOtpReq) (*ConfirmOtpResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfirmOtp not implemented")
 }
 func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
 func (UnimplementedAuthServiceServer) testEmbeddedByValue()                     {}
@@ -90,20 +138,74 @@ func RegisterAuthServiceServer(s grpc.ServiceRegistrar, srv AuthServiceServer) {
 	s.RegisterService(&AuthService_ServiceDesc, srv)
 }
 
-func _AuthService_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginReq)
+func _AuthService_LoginCustomer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginCustomerReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServiceServer).Login(ctx, in)
+		return srv.(AuthServiceServer).LoginCustomer(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthService_Login_FullMethodName,
+		FullMethod: AuthService_LoginCustomer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).Login(ctx, req.(*LoginReq))
+		return srv.(AuthServiceServer).LoginCustomer(ctx, req.(*LoginCustomerReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_LoginUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginUserReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).LoginUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_LoginUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).LoginUser(ctx, req.(*LoginUserReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_SendOtp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendOtpReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).SendOtp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_SendOtp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).SendOtp(ctx, req.(*SendOtpReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_ConfirmOtp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfirmOtpReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).ConfirmOtp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_ConfirmOtp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).ConfirmOtp(ctx, req.(*ConfirmOtpReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -116,8 +218,20 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*AuthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Login",
-			Handler:    _AuthService_Login_Handler,
+			MethodName: "LoginCustomer",
+			Handler:    _AuthService_LoginCustomer_Handler,
+		},
+		{
+			MethodName: "LoginUser",
+			Handler:    _AuthService_LoginUser_Handler,
+		},
+		{
+			MethodName: "SendOtp",
+			Handler:    _AuthService_SendOtp_Handler,
+		},
+		{
+			MethodName: "ConfirmOtp",
+			Handler:    _AuthService_ConfirmOtp_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

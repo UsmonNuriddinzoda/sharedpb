@@ -7,7 +7,10 @@ option go_package = "github.com/usmonnuriddinzoda/sharedpb/service/authpb";
 
 // Сервис для auth.
 service AuthService {
-  rpc Login (LoginReq) returns (LoginResp);
+  rpc LoginCustomer(LoginCustomerReq) returns (LoginCustomerResp);
+  rpc LoginUser(LoginUserReq) returns (LoginUserResp);
+  rpc SendOtp(SendOtpReq) returns (SendOtpResp);
+  rpc ConfirmOtp(ConfirmOtpReq) returns (ConfirmOtpResp);
 }
 
 message AuthServiceError {
@@ -15,13 +18,46 @@ message AuthServiceError {
   string err_description = 2;
 }
 
-message LoginReq {
+message LoginCustomerReq {
+  string phone = 1;
+}
+
+message LoginCustomerResp {
+  string requestId = 2;
+  AuthServiceError error = 3;
+}
+
+message SendOtpReq {
+  string requestId = 1;
+}
+
+message SendOtpResp {
+  int32  Expiration = 1;
+  int32  TotalSent  = 2;
+  AuthServiceError error = 4;
+}
+
+message ConfirmOtpReq {
+  int32  otp =  1;
+  string requestId  = 2;
+}
+
+message Token {
+  string AccessToken = 1;
+  string RefreshToken = 2;
+}
+
+message ConfirmOtpResp {
+  Token Token = 1;
+  string TypeCustomer = 2;
+  AuthServiceError error = 3;
+}
+
+message LoginUserReq{
   string username = 1;
   string password = 2;
 }
 
-message LoginResp {
-  string role = 1;
-  string requestId = 2;
-  AuthServiceError error = 3;
+message LoginUserResp{
+  string requestId = 1;
 }

@@ -73,7 +73,371 @@ func (x *AuthServiceError) GetErrDescription() string {
 	return ""
 }
 
-type LoginReq struct {
+type LoginCustomerReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Phone         string                 `protobuf:"bytes,1,opt,name=phone,proto3" json:"phone,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LoginCustomerReq) Reset() {
+	*x = LoginCustomerReq{}
+	mi := &file_auth_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LoginCustomerReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LoginCustomerReq) ProtoMessage() {}
+
+func (x *LoginCustomerReq) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LoginCustomerReq.ProtoReflect.Descriptor instead.
+func (*LoginCustomerReq) Descriptor() ([]byte, []int) {
+	return file_auth_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *LoginCustomerReq) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+type LoginCustomerResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RequestId     string                 `protobuf:"bytes,2,opt,name=requestId,proto3" json:"requestId,omitempty"`
+	Error         *AuthServiceError      `protobuf:"bytes,3,opt,name=error,proto3" json:"error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LoginCustomerResp) Reset() {
+	*x = LoginCustomerResp{}
+	mi := &file_auth_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LoginCustomerResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LoginCustomerResp) ProtoMessage() {}
+
+func (x *LoginCustomerResp) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LoginCustomerResp.ProtoReflect.Descriptor instead.
+func (*LoginCustomerResp) Descriptor() ([]byte, []int) {
+	return file_auth_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *LoginCustomerResp) GetRequestId() string {
+	if x != nil {
+		return x.RequestId
+	}
+	return ""
+}
+
+func (x *LoginCustomerResp) GetError() *AuthServiceError {
+	if x != nil {
+		return x.Error
+	}
+	return nil
+}
+
+type SendOtpReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RequestId     string                 `protobuf:"bytes,1,opt,name=requestId,proto3" json:"requestId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SendOtpReq) Reset() {
+	*x = SendOtpReq{}
+	mi := &file_auth_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendOtpReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendOtpReq) ProtoMessage() {}
+
+func (x *SendOtpReq) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendOtpReq.ProtoReflect.Descriptor instead.
+func (*SendOtpReq) Descriptor() ([]byte, []int) {
+	return file_auth_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *SendOtpReq) GetRequestId() string {
+	if x != nil {
+		return x.RequestId
+	}
+	return ""
+}
+
+type SendOtpResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Expiration    int32                  `protobuf:"varint,1,opt,name=Expiration,proto3" json:"Expiration,omitempty"`
+	TotalSent     int32                  `protobuf:"varint,2,opt,name=TotalSent,proto3" json:"TotalSent,omitempty"`
+	Error         *AuthServiceError      `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SendOtpResp) Reset() {
+	*x = SendOtpResp{}
+	mi := &file_auth_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendOtpResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendOtpResp) ProtoMessage() {}
+
+func (x *SendOtpResp) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendOtpResp.ProtoReflect.Descriptor instead.
+func (*SendOtpResp) Descriptor() ([]byte, []int) {
+	return file_auth_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *SendOtpResp) GetExpiration() int32 {
+	if x != nil {
+		return x.Expiration
+	}
+	return 0
+}
+
+func (x *SendOtpResp) GetTotalSent() int32 {
+	if x != nil {
+		return x.TotalSent
+	}
+	return 0
+}
+
+func (x *SendOtpResp) GetError() *AuthServiceError {
+	if x != nil {
+		return x.Error
+	}
+	return nil
+}
+
+type ConfirmOtpReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Otp           int32                  `protobuf:"varint,1,opt,name=otp,proto3" json:"otp,omitempty"`
+	RequestId     string                 `protobuf:"bytes,2,opt,name=requestId,proto3" json:"requestId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConfirmOtpReq) Reset() {
+	*x = ConfirmOtpReq{}
+	mi := &file_auth_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfirmOtpReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfirmOtpReq) ProtoMessage() {}
+
+func (x *ConfirmOtpReq) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfirmOtpReq.ProtoReflect.Descriptor instead.
+func (*ConfirmOtpReq) Descriptor() ([]byte, []int) {
+	return file_auth_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ConfirmOtpReq) GetOtp() int32 {
+	if x != nil {
+		return x.Otp
+	}
+	return 0
+}
+
+func (x *ConfirmOtpReq) GetRequestId() string {
+	if x != nil {
+		return x.RequestId
+	}
+	return ""
+}
+
+type Token struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=AccessToken,proto3" json:"AccessToken,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,2,opt,name=RefreshToken,proto3" json:"RefreshToken,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Token) Reset() {
+	*x = Token{}
+	mi := &file_auth_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Token) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Token) ProtoMessage() {}
+
+func (x *Token) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Token.ProtoReflect.Descriptor instead.
+func (*Token) Descriptor() ([]byte, []int) {
+	return file_auth_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *Token) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *Token) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+type ConfirmOtpResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Token         *Token                 `protobuf:"bytes,1,opt,name=Token,proto3" json:"Token,omitempty"`
+	TypeCustomer  string                 `protobuf:"bytes,2,opt,name=TypeCustomer,proto3" json:"TypeCustomer,omitempty"`
+	Error         *AuthServiceError      `protobuf:"bytes,3,opt,name=error,proto3" json:"error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConfirmOtpResp) Reset() {
+	*x = ConfirmOtpResp{}
+	mi := &file_auth_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfirmOtpResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfirmOtpResp) ProtoMessage() {}
+
+func (x *ConfirmOtpResp) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfirmOtpResp.ProtoReflect.Descriptor instead.
+func (*ConfirmOtpResp) Descriptor() ([]byte, []int) {
+	return file_auth_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ConfirmOtpResp) GetToken() *Token {
+	if x != nil {
+		return x.Token
+	}
+	return nil
+}
+
+func (x *ConfirmOtpResp) GetTypeCustomer() string {
+	if x != nil {
+		return x.TypeCustomer
+	}
+	return ""
+}
+
+func (x *ConfirmOtpResp) GetError() *AuthServiceError {
+	if x != nil {
+		return x.Error
+	}
+	return nil
+}
+
+type LoginUserReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
 	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
@@ -81,21 +445,21 @@ type LoginReq struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *LoginReq) Reset() {
-	*x = LoginReq{}
-	mi := &file_auth_proto_msgTypes[1]
+func (x *LoginUserReq) Reset() {
+	*x = LoginUserReq{}
+	mi := &file_auth_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *LoginReq) String() string {
+func (x *LoginUserReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*LoginReq) ProtoMessage() {}
+func (*LoginUserReq) ProtoMessage() {}
 
-func (x *LoginReq) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_proto_msgTypes[1]
+func (x *LoginUserReq) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -106,49 +470,47 @@ func (x *LoginReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LoginReq.ProtoReflect.Descriptor instead.
-func (*LoginReq) Descriptor() ([]byte, []int) {
-	return file_auth_proto_rawDescGZIP(), []int{1}
+// Deprecated: Use LoginUserReq.ProtoReflect.Descriptor instead.
+func (*LoginUserReq) Descriptor() ([]byte, []int) {
+	return file_auth_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *LoginReq) GetUsername() string {
+func (x *LoginUserReq) GetUsername() string {
 	if x != nil {
 		return x.Username
 	}
 	return ""
 }
 
-func (x *LoginReq) GetPassword() string {
+func (x *LoginUserReq) GetPassword() string {
 	if x != nil {
 		return x.Password
 	}
 	return ""
 }
 
-type LoginResp struct {
+type LoginUserResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Role          string                 `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty"`
-	RequestId     string                 `protobuf:"bytes,2,opt,name=requestId,proto3" json:"requestId,omitempty"`
-	Error         *AuthServiceError      `protobuf:"bytes,3,opt,name=error,proto3" json:"error,omitempty"`
+	RequestId     string                 `protobuf:"bytes,1,opt,name=requestId,proto3" json:"requestId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *LoginResp) Reset() {
-	*x = LoginResp{}
-	mi := &file_auth_proto_msgTypes[2]
+func (x *LoginUserResp) Reset() {
+	*x = LoginUserResp{}
+	mi := &file_auth_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *LoginResp) String() string {
+func (x *LoginUserResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*LoginResp) ProtoMessage() {}
+func (*LoginUserResp) ProtoMessage() {}
 
-func (x *LoginResp) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_proto_msgTypes[2]
+func (x *LoginUserResp) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -159,30 +521,16 @@ func (x *LoginResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LoginResp.ProtoReflect.Descriptor instead.
-func (*LoginResp) Descriptor() ([]byte, []int) {
-	return file_auth_proto_rawDescGZIP(), []int{2}
+// Deprecated: Use LoginUserResp.ProtoReflect.Descriptor instead.
+func (*LoginUserResp) Descriptor() ([]byte, []int) {
+	return file_auth_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *LoginResp) GetRole() string {
-	if x != nil {
-		return x.Role
-	}
-	return ""
-}
-
-func (x *LoginResp) GetRequestId() string {
+func (x *LoginUserResp) GetRequestId() string {
 	if x != nil {
 		return x.RequestId
 	}
 	return ""
-}
-
-func (x *LoginResp) GetError() *AuthServiceError {
-	if x != nil {
-		return x.Error
-	}
-	return nil
 }
 
 var File_auth_proto protoreflect.FileDescriptor
@@ -193,16 +541,42 @@ const file_auth_proto_rawDesc = "" +
 	"auth.proto\x12\x0eshared.service\"V\n" +
 	"\x10AuthServiceError\x12\x19\n" +
 	"\berr_code\x18\x01 \x01(\x03R\aerrCode\x12'\n" +
-	"\x0ferr_description\x18\x02 \x01(\tR\x0eerrDescription\"B\n" +
-	"\bLoginReq\x12\x1a\n" +
-	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"u\n" +
-	"\tLoginResp\x12\x12\n" +
-	"\x04role\x18\x01 \x01(\tR\x04role\x12\x1c\n" +
+	"\x0ferr_description\x18\x02 \x01(\tR\x0eerrDescription\"(\n" +
+	"\x10LoginCustomerReq\x12\x14\n" +
+	"\x05phone\x18\x01 \x01(\tR\x05phone\"i\n" +
+	"\x11LoginCustomerResp\x12\x1c\n" +
 	"\trequestId\x18\x02 \x01(\tR\trequestId\x126\n" +
-	"\x05error\x18\x03 \x01(\v2 .shared.service.AuthServiceErrorR\x05error2K\n" +
-	"\vAuthService\x12<\n" +
-	"\x05Login\x12\x18.shared.service.LoginReq\x1a\x19.shared.service.LoginRespB6Z4github.com/usmonnuriddinzoda/sharedpb/service/authpbb\x06proto3"
+	"\x05error\x18\x03 \x01(\v2 .shared.service.AuthServiceErrorR\x05error\"*\n" +
+	"\n" +
+	"SendOtpReq\x12\x1c\n" +
+	"\trequestId\x18\x01 \x01(\tR\trequestId\"\x83\x01\n" +
+	"\vSendOtpResp\x12\x1e\n" +
+	"\n" +
+	"Expiration\x18\x01 \x01(\x05R\n" +
+	"Expiration\x12\x1c\n" +
+	"\tTotalSent\x18\x02 \x01(\x05R\tTotalSent\x126\n" +
+	"\x05error\x18\x04 \x01(\v2 .shared.service.AuthServiceErrorR\x05error\"?\n" +
+	"\rConfirmOtpReq\x12\x10\n" +
+	"\x03otp\x18\x01 \x01(\x05R\x03otp\x12\x1c\n" +
+	"\trequestId\x18\x02 \x01(\tR\trequestId\"M\n" +
+	"\x05Token\x12 \n" +
+	"\vAccessToken\x18\x01 \x01(\tR\vAccessToken\x12\"\n" +
+	"\fRefreshToken\x18\x02 \x01(\tR\fRefreshToken\"\x99\x01\n" +
+	"\x0eConfirmOtpResp\x12+\n" +
+	"\x05Token\x18\x01 \x01(\v2\x15.shared.service.TokenR\x05Token\x12\"\n" +
+	"\fTypeCustomer\x18\x02 \x01(\tR\fTypeCustomer\x126\n" +
+	"\x05error\x18\x03 \x01(\v2 .shared.service.AuthServiceErrorR\x05error\"F\n" +
+	"\fLoginUserReq\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"-\n" +
+	"\rLoginUserResp\x12\x1c\n" +
+	"\trequestId\x18\x01 \x01(\tR\trequestId2\xbe\x02\n" +
+	"\vAuthService\x12T\n" +
+	"\rLoginCustomer\x12 .shared.service.LoginCustomerReq\x1a!.shared.service.LoginCustomerResp\x12H\n" +
+	"\tLoginUser\x12\x1c.shared.service.LoginUserReq\x1a\x1d.shared.service.LoginUserResp\x12B\n" +
+	"\aSendOtp\x12\x1a.shared.service.SendOtpReq\x1a\x1b.shared.service.SendOtpResp\x12K\n" +
+	"\n" +
+	"ConfirmOtp\x12\x1d.shared.service.ConfirmOtpReq\x1a\x1e.shared.service.ConfirmOtpRespB6Z4github.com/usmonnuriddinzoda/sharedpb/service/authpbb\x06proto3"
 
 var (
 	file_auth_proto_rawDescOnce sync.Once
@@ -216,21 +590,37 @@ func file_auth_proto_rawDescGZIP() []byte {
 	return file_auth_proto_rawDescData
 }
 
-var file_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_auth_proto_goTypes = []any{
-	(*AuthServiceError)(nil), // 0: shared.service.AuthServiceError
-	(*LoginReq)(nil),         // 1: shared.service.LoginReq
-	(*LoginResp)(nil),        // 2: shared.service.LoginResp
+	(*AuthServiceError)(nil),  // 0: shared.service.AuthServiceError
+	(*LoginCustomerReq)(nil),  // 1: shared.service.LoginCustomerReq
+	(*LoginCustomerResp)(nil), // 2: shared.service.LoginCustomerResp
+	(*SendOtpReq)(nil),        // 3: shared.service.SendOtpReq
+	(*SendOtpResp)(nil),       // 4: shared.service.SendOtpResp
+	(*ConfirmOtpReq)(nil),     // 5: shared.service.ConfirmOtpReq
+	(*Token)(nil),             // 6: shared.service.Token
+	(*ConfirmOtpResp)(nil),    // 7: shared.service.ConfirmOtpResp
+	(*LoginUserReq)(nil),      // 8: shared.service.LoginUserReq
+	(*LoginUserResp)(nil),     // 9: shared.service.LoginUserResp
 }
 var file_auth_proto_depIdxs = []int32{
-	0, // 0: shared.service.LoginResp.error:type_name -> shared.service.AuthServiceError
-	1, // 1: shared.service.AuthService.Login:input_type -> shared.service.LoginReq
-	2, // 2: shared.service.AuthService.Login:output_type -> shared.service.LoginResp
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	0, // 0: shared.service.LoginCustomerResp.error:type_name -> shared.service.AuthServiceError
+	0, // 1: shared.service.SendOtpResp.error:type_name -> shared.service.AuthServiceError
+	6, // 2: shared.service.ConfirmOtpResp.Token:type_name -> shared.service.Token
+	0, // 3: shared.service.ConfirmOtpResp.error:type_name -> shared.service.AuthServiceError
+	1, // 4: shared.service.AuthService.LoginCustomer:input_type -> shared.service.LoginCustomerReq
+	8, // 5: shared.service.AuthService.LoginUser:input_type -> shared.service.LoginUserReq
+	3, // 6: shared.service.AuthService.SendOtp:input_type -> shared.service.SendOtpReq
+	5, // 7: shared.service.AuthService.ConfirmOtp:input_type -> shared.service.ConfirmOtpReq
+	2, // 8: shared.service.AuthService.LoginCustomer:output_type -> shared.service.LoginCustomerResp
+	9, // 9: shared.service.AuthService.LoginUser:output_type -> shared.service.LoginUserResp
+	4, // 10: shared.service.AuthService.SendOtp:output_type -> shared.service.SendOtpResp
+	7, // 11: shared.service.AuthService.ConfirmOtp:output_type -> shared.service.ConfirmOtpResp
+	8, // [8:12] is the sub-list for method output_type
+	4, // [4:8] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_auth_proto_init() }
@@ -244,7 +634,7 @@ func file_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_auth_proto_rawDesc), len(file_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
