@@ -38,7 +38,7 @@ message SendOtpResp {
 }
 
 message ConfirmOtpReq {
-  int32  otp =  1;
+  string  otp =  1;
   string requestId  = 2;
 }
 

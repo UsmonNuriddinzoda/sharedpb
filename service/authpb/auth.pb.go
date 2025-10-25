@@ -275,7 +275,7 @@ func (x *SendOtpResp) GetError() *AuthServiceError {
 
 type ConfirmOtpReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Otp           int32                  `protobuf:"varint,1,opt,name=otp,proto3" json:"otp,omitempty"`
+	Otp           string                 `protobuf:"bytes,1,opt,name=otp,proto3" json:"otp,omitempty"`
 	RequestId     string                 `protobuf:"bytes,2,opt,name=requestId,proto3" json:"requestId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -311,11 +311,11 @@ func (*ConfirmOtpReq) Descriptor() ([]byte, []int) {
 	return file_auth_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *ConfirmOtpReq) GetOtp() int32 {
+func (x *ConfirmOtpReq) GetOtp() string {
 	if x != nil {
 		return x.Otp
 	}
-	return 0
+	return ""
 }
 
 func (x *ConfirmOtpReq) GetRequestId() string {
@@ -557,7 +557,7 @@ const file_auth_proto_rawDesc = "" +
 	"\tTotalSent\x18\x02 \x01(\x05R\tTotalSent\x126\n" +
 	"\x05error\x18\x04 \x01(\v2 .shared.service.AuthServiceErrorR\x05error\"?\n" +
 	"\rConfirmOtpReq\x12\x10\n" +
-	"\x03otp\x18\x01 \x01(\x05R\x03otp\x12\x1c\n" +
+	"\x03otp\x18\x01 \x01(\tR\x03otp\x12\x1c\n" +
 	"\trequestId\x18\x02 \x01(\tR\trequestId\"M\n" +
 	"\x05Token\x12 \n" +
 	"\vAccessToken\x18\x01 \x01(\tR\vAccessToken\x12\"\n" +
