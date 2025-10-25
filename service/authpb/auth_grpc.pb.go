@@ -23,6 +23,7 @@ const (
 	AuthService_LoginUser_FullMethodName     = "/shared.service.AuthService/LoginUser"
 	AuthService_SendOtp_FullMethodName       = "/shared.service.AuthService/SendOtp"
 	AuthService_ConfirmOtp_FullMethodName    = "/shared.service.AuthService/ConfirmOtp"
+	AuthService_RefreshToken_FullMethodName  = "/shared.service.AuthService/RefreshToken"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -35,6 +36,7 @@ type AuthServiceClient interface {
 	LoginUser(ctx context.Context, in *LoginUserReq, opts ...grpc.CallOption) (*LoginUserResp, error)
 	SendOtp(ctx context.Context, in *SendOtpReq, opts ...grpc.CallOption) (*SendOtpResp, error)
 	ConfirmOtp(ctx context.Context, in *ConfirmOtpReq, opts ...grpc.CallOption) (*ConfirmOtpResp, error)
+	RefreshToken(ctx context.Context, in *RefreshTokenReq, opts ...grpc.CallOption) (*RefreshTokenResp, error)
 }
 
 type authServiceClient struct {
@@ -85,6 +87,16 @@ func (c *authServiceClient) ConfirmOtp(ctx context.Context, in *ConfirmOtpReq, o
 	return out, nil
 }
 
+func (c *authServiceClient) RefreshToken(ctx context.Context, in *RefreshTokenReq, opts ...grpc.CallOption) (*RefreshTokenResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RefreshTokenResp)
+	err := c.cc.Invoke(ctx, AuthService_RefreshToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServiceServer is the server API for AuthService service.
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility.
@@ -95,6 +107,7 @@ type AuthServiceServer interface {
 	LoginUser(context.Context, *LoginUserReq) (*LoginUserResp, error)
 	SendOtp(context.Context, *SendOtpReq) (*SendOtpResp, error)
 	ConfirmOtp(context.Context, *ConfirmOtpReq) (*ConfirmOtpResp, error)
+	RefreshToken(context.Context, *RefreshTokenReq) (*RefreshTokenResp, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
 
@@ -116,6 +129,9 @@ func (UnimplementedAuthServiceServer) SendOtp(context.Context, *SendOtpReq) (*Se
 }
 func (UnimplementedAuthServiceServer) ConfirmOtp(context.Context, *ConfirmOtpReq) (*ConfirmOtpResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConfirmOtp not implemented")
+}
+func (UnimplementedAuthServiceServer) RefreshToken(context.Context, *RefreshTokenReq) (*RefreshTokenResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
 }
 func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
 func (UnimplementedAuthServiceServer) testEmbeddedByValue()                     {}
@@ -210,6 +226,24 @@ func _AuthService_ConfirmOtp_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthService_RefreshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RefreshTokenReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).RefreshToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_RefreshToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).RefreshToken(ctx, req.(*RefreshTokenReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AuthService_ServiceDesc is the grpc.ServiceDesc for AuthService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -232,6 +266,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ConfirmOtp",
 			Handler:    _AuthService_ConfirmOtp_Handler,
+		},
+		{
+			MethodName: "RefreshToken",
+			Handler:    _AuthService_RefreshToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

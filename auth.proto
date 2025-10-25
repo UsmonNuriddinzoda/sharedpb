@@ -11,6 +11,7 @@ service AuthService {
   rpc LoginUser(LoginUserReq) returns (LoginUserResp);
   rpc SendOtp(SendOtpReq) returns (SendOtpResp);
   rpc ConfirmOtp(ConfirmOtpReq) returns (ConfirmOtpResp);
+  rpc RefreshToken(RefreshTokenReq) returns (RefreshTokenResp);
 }
 
 message AuthServiceError {
@@ -60,4 +61,13 @@ message LoginUserReq{
 
 message LoginUserResp{
   string requestId = 1;
+  AuthServiceError error = 2;
+}
+
+message RefreshTokenReq {
+  string refreshToken = 1;
+}
+message RefreshTokenResp {
+  Token token = 1;
+  AuthServiceError error = 2;
 }

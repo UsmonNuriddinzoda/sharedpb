@@ -492,6 +492,7 @@ func (x *LoginUserReq) GetPassword() string {
 type LoginUserResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RequestId     string                 `protobuf:"bytes,1,opt,name=requestId,proto3" json:"requestId,omitempty"`
+	Error         *AuthServiceError      `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -533,6 +534,109 @@ func (x *LoginUserResp) GetRequestId() string {
 	return ""
 }
 
+func (x *LoginUserResp) GetError() *AuthServiceError {
+	if x != nil {
+		return x.Error
+	}
+	return nil
+}
+
+type RefreshTokenReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshTokenReq) Reset() {
+	*x = RefreshTokenReq{}
+	mi := &file_auth_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshTokenReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshTokenReq) ProtoMessage() {}
+
+func (x *RefreshTokenReq) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshTokenReq.ProtoReflect.Descriptor instead.
+func (*RefreshTokenReq) Descriptor() ([]byte, []int) {
+	return file_auth_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *RefreshTokenReq) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+type RefreshTokenResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Token         *Token                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	Error         *AuthServiceError      `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshTokenResp) Reset() {
+	*x = RefreshTokenResp{}
+	mi := &file_auth_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshTokenResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshTokenResp) ProtoMessage() {}
+
+func (x *RefreshTokenResp) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshTokenResp.ProtoReflect.Descriptor instead.
+func (*RefreshTokenResp) Descriptor() ([]byte, []int) {
+	return file_auth_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *RefreshTokenResp) GetToken() *Token {
+	if x != nil {
+		return x.Token
+	}
+	return nil
+}
+
+func (x *RefreshTokenResp) GetError() *AuthServiceError {
+	if x != nil {
+		return x.Error
+	}
+	return nil
+}
+
 var File_auth_proto protoreflect.FileDescriptor
 
 const file_auth_proto_rawDesc = "" +
@@ -568,15 +672,22 @@ const file_auth_proto_rawDesc = "" +
 	"\x05error\x18\x03 \x01(\v2 .shared.service.AuthServiceErrorR\x05error\"F\n" +
 	"\fLoginUserReq\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"-\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"e\n" +
 	"\rLoginUserResp\x12\x1c\n" +
-	"\trequestId\x18\x01 \x01(\tR\trequestId2\xbe\x02\n" +
+	"\trequestId\x18\x01 \x01(\tR\trequestId\x126\n" +
+	"\x05error\x18\x02 \x01(\v2 .shared.service.AuthServiceErrorR\x05error\"5\n" +
+	"\x0fRefreshTokenReq\x12\"\n" +
+	"\frefreshToken\x18\x01 \x01(\tR\frefreshToken\"w\n" +
+	"\x10RefreshTokenResp\x12+\n" +
+	"\x05token\x18\x01 \x01(\v2\x15.shared.service.TokenR\x05token\x126\n" +
+	"\x05error\x18\x02 \x01(\v2 .shared.service.AuthServiceErrorR\x05error2\x91\x03\n" +
 	"\vAuthService\x12T\n" +
 	"\rLoginCustomer\x12 .shared.service.LoginCustomerReq\x1a!.shared.service.LoginCustomerResp\x12H\n" +
 	"\tLoginUser\x12\x1c.shared.service.LoginUserReq\x1a\x1d.shared.service.LoginUserResp\x12B\n" +
 	"\aSendOtp\x12\x1a.shared.service.SendOtpReq\x1a\x1b.shared.service.SendOtpResp\x12K\n" +
 	"\n" +
-	"ConfirmOtp\x12\x1d.shared.service.ConfirmOtpReq\x1a\x1e.shared.service.ConfirmOtpRespB6Z4github.com/usmonnuriddinzoda/sharedpb/service/authpbb\x06proto3"
+	"ConfirmOtp\x12\x1d.shared.service.ConfirmOtpReq\x1a\x1e.shared.service.ConfirmOtpResp\x12Q\n" +
+	"\fRefreshToken\x12\x1f.shared.service.RefreshTokenReq\x1a .shared.service.RefreshTokenRespB6Z4github.com/usmonnuriddinzoda/sharedpb/service/authpbb\x06proto3"
 
 var (
 	file_auth_proto_rawDescOnce sync.Once
@@ -590,7 +701,7 @@ func file_auth_proto_rawDescGZIP() []byte {
 	return file_auth_proto_rawDescData
 }
 
-var file_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_auth_proto_goTypes = []any{
 	(*AuthServiceError)(nil),  // 0: shared.service.AuthServiceError
 	(*LoginCustomerReq)(nil),  // 1: shared.service.LoginCustomerReq
@@ -602,25 +713,32 @@ var file_auth_proto_goTypes = []any{
 	(*ConfirmOtpResp)(nil),    // 7: shared.service.ConfirmOtpResp
 	(*LoginUserReq)(nil),      // 8: shared.service.LoginUserReq
 	(*LoginUserResp)(nil),     // 9: shared.service.LoginUserResp
+	(*RefreshTokenReq)(nil),   // 10: shared.service.RefreshTokenReq
+	(*RefreshTokenResp)(nil),  // 11: shared.service.RefreshTokenResp
 }
 var file_auth_proto_depIdxs = []int32{
-	0, // 0: shared.service.LoginCustomerResp.error:type_name -> shared.service.AuthServiceError
-	0, // 1: shared.service.SendOtpResp.error:type_name -> shared.service.AuthServiceError
-	6, // 2: shared.service.ConfirmOtpResp.Token:type_name -> shared.service.Token
-	0, // 3: shared.service.ConfirmOtpResp.error:type_name -> shared.service.AuthServiceError
-	1, // 4: shared.service.AuthService.LoginCustomer:input_type -> shared.service.LoginCustomerReq
-	8, // 5: shared.service.AuthService.LoginUser:input_type -> shared.service.LoginUserReq
-	3, // 6: shared.service.AuthService.SendOtp:input_type -> shared.service.SendOtpReq
-	5, // 7: shared.service.AuthService.ConfirmOtp:input_type -> shared.service.ConfirmOtpReq
-	2, // 8: shared.service.AuthService.LoginCustomer:output_type -> shared.service.LoginCustomerResp
-	9, // 9: shared.service.AuthService.LoginUser:output_type -> shared.service.LoginUserResp
-	4, // 10: shared.service.AuthService.SendOtp:output_type -> shared.service.SendOtpResp
-	7, // 11: shared.service.AuthService.ConfirmOtp:output_type -> shared.service.ConfirmOtpResp
-	8, // [8:12] is the sub-list for method output_type
-	4, // [4:8] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	0,  // 0: shared.service.LoginCustomerResp.error:type_name -> shared.service.AuthServiceError
+	0,  // 1: shared.service.SendOtpResp.error:type_name -> shared.service.AuthServiceError
+	6,  // 2: shared.service.ConfirmOtpResp.Token:type_name -> shared.service.Token
+	0,  // 3: shared.service.ConfirmOtpResp.error:type_name -> shared.service.AuthServiceError
+	0,  // 4: shared.service.LoginUserResp.error:type_name -> shared.service.AuthServiceError
+	6,  // 5: shared.service.RefreshTokenResp.token:type_name -> shared.service.Token
+	0,  // 6: shared.service.RefreshTokenResp.error:type_name -> shared.service.AuthServiceError
+	1,  // 7: shared.service.AuthService.LoginCustomer:input_type -> shared.service.LoginCustomerReq
+	8,  // 8: shared.service.AuthService.LoginUser:input_type -> shared.service.LoginUserReq
+	3,  // 9: shared.service.AuthService.SendOtp:input_type -> shared.service.SendOtpReq
+	5,  // 10: shared.service.AuthService.ConfirmOtp:input_type -> shared.service.ConfirmOtpReq
+	10, // 11: shared.service.AuthService.RefreshToken:input_type -> shared.service.RefreshTokenReq
+	2,  // 12: shared.service.AuthService.LoginCustomer:output_type -> shared.service.LoginCustomerResp
+	9,  // 13: shared.service.AuthService.LoginUser:output_type -> shared.service.LoginUserResp
+	4,  // 14: shared.service.AuthService.SendOtp:output_type -> shared.service.SendOtpResp
+	7,  // 15: shared.service.AuthService.ConfirmOtp:output_type -> shared.service.ConfirmOtpResp
+	11, // 16: shared.service.AuthService.RefreshToken:output_type -> shared.service.RefreshTokenResp
+	12, // [12:17] is the sub-list for method output_type
+	7,  // [7:12] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_auth_proto_init() }
@@ -634,7 +752,7 @@ func file_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_auth_proto_rawDesc), len(file_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
