@@ -41,6 +41,8 @@ message SendOtpResp {
 message ConfirmOtpReq {
   string  otp =  1;
   string requestId  = 2;
+  string ip_address = 3;   // IP клиента (если нужно фиксировать)
+  string user_agent = 4;   // User-Agent клиента
 }
 
 message Token {

@@ -277,6 +277,8 @@ type ConfirmOtpReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Otp           string                 `protobuf:"bytes,1,opt,name=otp,proto3" json:"otp,omitempty"`
 	RequestId     string                 `protobuf:"bytes,2,opt,name=requestId,proto3" json:"requestId,omitempty"`
+	IpAddress     string                 `protobuf:"bytes,3,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"` // IP клиента (если нужно фиксировать)
+	UserAgent     string                 `protobuf:"bytes,4,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"` // User-Agent клиента
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -321,6 +323,20 @@ func (x *ConfirmOtpReq) GetOtp() string {
 func (x *ConfirmOtpReq) GetRequestId() string {
 	if x != nil {
 		return x.RequestId
+	}
+	return ""
+}
+
+func (x *ConfirmOtpReq) GetIpAddress() string {
+	if x != nil {
+		return x.IpAddress
+	}
+	return ""
+}
+
+func (x *ConfirmOtpReq) GetUserAgent() string {
+	if x != nil {
+		return x.UserAgent
 	}
 	return ""
 }
@@ -659,10 +675,14 @@ const file_auth_proto_rawDesc = "" +
 	"Expiration\x18\x01 \x01(\x05R\n" +
 	"Expiration\x12\x1c\n" +
 	"\tTotalSent\x18\x02 \x01(\x05R\tTotalSent\x126\n" +
-	"\x05error\x18\x04 \x01(\v2 .shared.service.AuthServiceErrorR\x05error\"?\n" +
+	"\x05error\x18\x04 \x01(\v2 .shared.service.AuthServiceErrorR\x05error\"}\n" +
 	"\rConfirmOtpReq\x12\x10\n" +
 	"\x03otp\x18\x01 \x01(\tR\x03otp\x12\x1c\n" +
-	"\trequestId\x18\x02 \x01(\tR\trequestId\"M\n" +
+	"\trequestId\x18\x02 \x01(\tR\trequestId\x12\x1d\n" +
+	"\n" +
+	"ip_address\x18\x03 \x01(\tR\tipAddress\x12\x1d\n" +
+	"\n" +
+	"user_agent\x18\x04 \x01(\tR\tuserAgent\"M\n" +
 	"\x05Token\x12 \n" +
 	"\vAccessToken\x18\x01 \x01(\tR\vAccessToken\x12\"\n" +
 	"\fRefreshToken\x18\x02 \x01(\tR\fRefreshToken\"\x99\x01\n" +
