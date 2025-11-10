@@ -32,11 +32,11 @@ const (
 //
 // Сервис для auth.
 type AuthServiceClient interface {
-	LoginCustomer(ctx context.Context, in *LoginCustomerReq, opts ...grpc.CallOption) (*LoginCustomerResp, error)
-	LoginUser(ctx context.Context, in *LoginUserReq, opts ...grpc.CallOption) (*LoginUserResp, error)
-	SendOtp(ctx context.Context, in *SendOtpReq, opts ...grpc.CallOption) (*SendOtpResp, error)
-	ConfirmOtp(ctx context.Context, in *ConfirmOtpReq, opts ...grpc.CallOption) (*ConfirmOtpResp, error)
-	RefreshToken(ctx context.Context, in *RefreshTokenReq, opts ...grpc.CallOption) (*RefreshTokenResp, error)
+	LoginCustomer(ctx context.Context, in *LoginCustomerRequest, opts ...grpc.CallOption) (*LoginCustomerResponse, error)
+	LoginUser(ctx context.Context, in *LoginUserRequest, opts ...grpc.CallOption) (*LoginUserResponse, error)
+	SendOtp(ctx context.Context, in *SendOtpRequest, opts ...grpc.CallOption) (*SendOtpResponse, error)
+	ConfirmOtp(ctx context.Context, in *ConfirmOtpRequest, opts ...grpc.CallOption) (*ConfirmOtpResponse, error)
+	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
 }
 
 type authServiceClient struct {
@@ -47,9 +47,9 @@ func NewAuthServiceClient(cc grpc.ClientConnInterface) AuthServiceClient {
 	return &authServiceClient{cc}
 }
 
-func (c *authServiceClient) LoginCustomer(ctx context.Context, in *LoginCustomerReq, opts ...grpc.CallOption) (*LoginCustomerResp, error) {
+func (c *authServiceClient) LoginCustomer(ctx context.Context, in *LoginCustomerRequest, opts ...grpc.CallOption) (*LoginCustomerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(LoginCustomerResp)
+	out := new(LoginCustomerResponse)
 	err := c.cc.Invoke(ctx, AuthService_LoginCustomer_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -57,9 +57,9 @@ func (c *authServiceClient) LoginCustomer(ctx context.Context, in *LoginCustomer
 	return out, nil
 }
 
-func (c *authServiceClient) LoginUser(ctx context.Context, in *LoginUserReq, opts ...grpc.CallOption) (*LoginUserResp, error) {
+func (c *authServiceClient) LoginUser(ctx context.Context, in *LoginUserRequest, opts ...grpc.CallOption) (*LoginUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(LoginUserResp)
+	out := new(LoginUserResponse)
 	err := c.cc.Invoke(ctx, AuthService_LoginUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -67,9 +67,9 @@ func (c *authServiceClient) LoginUser(ctx context.Context, in *LoginUserReq, opt
 	return out, nil
 }
 
-func (c *authServiceClient) SendOtp(ctx context.Context, in *SendOtpReq, opts ...grpc.CallOption) (*SendOtpResp, error) {
+func (c *authServiceClient) SendOtp(ctx context.Context, in *SendOtpRequest, opts ...grpc.CallOption) (*SendOtpResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SendOtpResp)
+	out := new(SendOtpResponse)
 	err := c.cc.Invoke(ctx, AuthService_SendOtp_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -77,9 +77,9 @@ func (c *authServiceClient) SendOtp(ctx context.Context, in *SendOtpReq, opts ..
 	return out, nil
 }
 
-func (c *authServiceClient) ConfirmOtp(ctx context.Context, in *ConfirmOtpReq, opts ...grpc.CallOption) (*ConfirmOtpResp, error) {
+func (c *authServiceClient) ConfirmOtp(ctx context.Context, in *ConfirmOtpRequest, opts ...grpc.CallOption) (*ConfirmOtpResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ConfirmOtpResp)
+	out := new(ConfirmOtpResponse)
 	err := c.cc.Invoke(ctx, AuthService_ConfirmOtp_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -87,9 +87,9 @@ func (c *authServiceClient) ConfirmOtp(ctx context.Context, in *ConfirmOtpReq, o
 	return out, nil
 }
 
-func (c *authServiceClient) RefreshToken(ctx context.Context, in *RefreshTokenReq, opts ...grpc.CallOption) (*RefreshTokenResp, error) {
+func (c *authServiceClient) RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RefreshTokenResp)
+	out := new(RefreshTokenResponse)
 	err := c.cc.Invoke(ctx, AuthService_RefreshToken_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -103,11 +103,11 @@ func (c *authServiceClient) RefreshToken(ctx context.Context, in *RefreshTokenRe
 //
 // Сервис для auth.
 type AuthServiceServer interface {
-	LoginCustomer(context.Context, *LoginCustomerReq) (*LoginCustomerResp, error)
-	LoginUser(context.Context, *LoginUserReq) (*LoginUserResp, error)
-	SendOtp(context.Context, *SendOtpReq) (*SendOtpResp, error)
-	ConfirmOtp(context.Context, *ConfirmOtpReq) (*ConfirmOtpResp, error)
-	RefreshToken(context.Context, *RefreshTokenReq) (*RefreshTokenResp, error)
+	LoginCustomer(context.Context, *LoginCustomerRequest) (*LoginCustomerResponse, error)
+	LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error)
+	SendOtp(context.Context, *SendOtpRequest) (*SendOtpResponse, error)
+	ConfirmOtp(context.Context, *ConfirmOtpRequest) (*ConfirmOtpResponse, error)
+	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
 
@@ -118,19 +118,19 @@ type AuthServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAuthServiceServer struct{}
 
-func (UnimplementedAuthServiceServer) LoginCustomer(context.Context, *LoginCustomerReq) (*LoginCustomerResp, error) {
+func (UnimplementedAuthServiceServer) LoginCustomer(context.Context, *LoginCustomerRequest) (*LoginCustomerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginCustomer not implemented")
 }
-func (UnimplementedAuthServiceServer) LoginUser(context.Context, *LoginUserReq) (*LoginUserResp, error) {
+func (UnimplementedAuthServiceServer) LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginUser not implemented")
 }
-func (UnimplementedAuthServiceServer) SendOtp(context.Context, *SendOtpReq) (*SendOtpResp, error) {
+func (UnimplementedAuthServiceServer) SendOtp(context.Context, *SendOtpRequest) (*SendOtpResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendOtp not implemented")
 }
-func (UnimplementedAuthServiceServer) ConfirmOtp(context.Context, *ConfirmOtpReq) (*ConfirmOtpResp, error) {
+func (UnimplementedAuthServiceServer) ConfirmOtp(context.Context, *ConfirmOtpRequest) (*ConfirmOtpResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConfirmOtp not implemented")
 }
-func (UnimplementedAuthServiceServer) RefreshToken(context.Context, *RefreshTokenReq) (*RefreshTokenResp, error) {
+func (UnimplementedAuthServiceServer) RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
 }
 func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
@@ -155,7 +155,7 @@ func RegisterAuthServiceServer(s grpc.ServiceRegistrar, srv AuthServiceServer) {
 }
 
 func _AuthService_LoginCustomer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginCustomerReq)
+	in := new(LoginCustomerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -167,13 +167,13 @@ func _AuthService_LoginCustomer_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: AuthService_LoginCustomer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).LoginCustomer(ctx, req.(*LoginCustomerReq))
+		return srv.(AuthServiceServer).LoginCustomer(ctx, req.(*LoginCustomerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _AuthService_LoginUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginUserReq)
+	in := new(LoginUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -185,13 +185,13 @@ func _AuthService_LoginUser_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: AuthService_LoginUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).LoginUser(ctx, req.(*LoginUserReq))
+		return srv.(AuthServiceServer).LoginUser(ctx, req.(*LoginUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _AuthService_SendOtp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SendOtpReq)
+	in := new(SendOtpRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -203,13 +203,13 @@ func _AuthService_SendOtp_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: AuthService_SendOtp_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).SendOtp(ctx, req.(*SendOtpReq))
+		return srv.(AuthServiceServer).SendOtp(ctx, req.(*SendOtpRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _AuthService_ConfirmOtp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ConfirmOtpReq)
+	in := new(ConfirmOtpRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -221,13 +221,13 @@ func _AuthService_ConfirmOtp_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: AuthService_ConfirmOtp_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).ConfirmOtp(ctx, req.(*ConfirmOtpReq))
+		return srv.(AuthServiceServer).ConfirmOtp(ctx, req.(*ConfirmOtpRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _AuthService_RefreshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RefreshTokenReq)
+	in := new(RefreshTokenRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -239,7 +239,7 @@ func _AuthService_RefreshToken_Handler(srv interface{}, ctx context.Context, dec
 		FullMethod: AuthService_RefreshToken_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).RefreshToken(ctx, req.(*RefreshTokenReq))
+		return srv.(AuthServiceServer).RefreshToken(ctx, req.(*RefreshTokenRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

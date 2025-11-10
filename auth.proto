@@ -7,11 +7,11 @@ option go_package = "github.com/usmonnuriddinzoda/sharedpb/service/authpb";
 
 // Сервис для auth.
 service AuthService {
-  rpc LoginCustomer(LoginCustomerReq) returns (LoginCustomerResp);
-  rpc LoginUser(LoginUserReq) returns (LoginUserResp);
-  rpc SendOtp(SendOtpReq) returns (SendOtpResp);
-  rpc ConfirmOtp(ConfirmOtpReq) returns (ConfirmOtpResp);
-  rpc RefreshToken(RefreshTokenReq) returns (RefreshTokenResp);
+  rpc LoginCustomer(LoginCustomerRequest) returns (LoginCustomerResponse);
+  rpc LoginUser(LoginUserRequest) returns (LoginUserResponse);
+  rpc SendOtp(SendOtpRequest) returns (SendOtpResponse);
+  rpc ConfirmOtp(ConfirmOtpRequest) returns (ConfirmOtpResponse);
+  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
 }
 
 message AuthServiceError {
@@ -19,26 +19,26 @@ message AuthServiceError {
   string err_description = 2;
 }
 
-message LoginCustomerReq {
+message LoginCustomerRequest {
   string phone = 1;
 }
 
-message LoginCustomerResp {
+message LoginCustomerResponse {
   string requestId = 2;
   AuthServiceError error = 3;
 }
 
-message SendOtpReq {
+message SendOtpRequest {
   string requestId = 1;
 }
 
-message SendOtpResp {
+message SendOtpResponse {
   int32  Expiration = 1;
   int32  TotalSent  = 2;
   AuthServiceError error = 4;
 }
 
-message ConfirmOtpReq {
+message ConfirmOtpRequest {
   string  otp =  1;
   string requestId  = 2;
   string ip_address = 3;   // IP клиента (если нужно фиксировать)
@@ -50,26 +50,26 @@ message Token {
   string RefreshToken = 2;
 }
 
-message ConfirmOtpResp {
+message ConfirmOtpResponse {
   Token Token = 1;
   string TypeCustomer = 2;
   AuthServiceError error = 3;
 }
 
-message LoginUserReq{
+message LoginUserRequest{
   string username = 1;
   string password = 2;
 }
 
-message LoginUserResp{
+message LoginUserResponse{
   string requestId = 1;
   AuthServiceError error = 2;
 }
 
-message RefreshTokenReq {
+message RefreshTokenRequest {
   string refreshToken = 1;
 }
-message RefreshTokenResp {
+message RefreshTokenResponse {
   Token token = 1;
   AuthServiceError error = 2;
 }
